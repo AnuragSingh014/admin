@@ -8,7 +8,7 @@ const Table = () => {
   useEffect(() => {
     const fetchContacts = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/contact/all'); // Full URL
+        const response = await fetch('https://admin-kappa-swart.vercel.app/api/contact/all'); // Full URL
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
