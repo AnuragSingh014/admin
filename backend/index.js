@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(cors());
 
 mongoose
-  .connect(process.env.MONGO_URI, {
+  .connect("mongodb+srv://influidity:uCIOM9kXvLuIXIii@influidity.w8ykh.mongodb.net/?retryWrites=true&w=majority&appName=influidity", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
