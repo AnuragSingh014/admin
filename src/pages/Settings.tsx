@@ -17,7 +17,7 @@ const Settings: React.FC = () => {
   useEffect(() => {
     const fetchContacts = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/career/all');
+        const response = await fetch('https://admin-kappa-swart.vercel.app/api/career/all');
         if (!response.ok) throw new Error('Failed to fetch contacts');
         const data: Contact[] = await response.json();
         setContacts(data);

@@ -17,7 +17,7 @@ const TableOne: React.FC = () => {
   useEffect(() => {
     const fetchContacts = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/contact/all');
+        const response = await fetch('https://admin-kappa-swart.vercel.app/api/contact/all');
         if (!response.ok) throw new Error('Failed to fetch contacts');
         const data: Contact[] = await response.json();
         setContacts(data);

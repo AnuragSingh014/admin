@@ -23,7 +23,7 @@ const FormLayout = () => {
 
   const fetchJobs = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/jobs');
+      const response = await fetch('https://admin-kappa-swart.vercel.app/api/jobs');
       if (!response.ok) throw new Error('Failed to fetch jobs');
       const data = await response.json();
       setJobs(data);
@@ -35,7 +35,7 @@ const FormLayout = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:5000/api/jobs', {
+      const response = await fetch('https://admin-kappa-swart.vercel.app/api/jobs', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -54,7 +54,7 @@ const FormLayout = () => {
 
   const handleDelete = async (jobId: string) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/jobs/${jobId}`, {
+      const response = await fetch(`https://admin-kappa-swart.vercel.app/jobs/${jobId}`, {
         method: 'DELETE',
       });
       

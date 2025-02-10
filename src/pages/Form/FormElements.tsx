@@ -21,7 +21,7 @@ const FormElements: React.FC = () => {
 
   const fetchProcesses = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/process");
+      const response = await fetch("https://admin-kappa-swart.vercel.app/api/process");
       if (!response.ok) throw new Error("Failed to fetch");
       const data: Process[] = await response.json();
       setProcesses(data);
@@ -38,7 +38,7 @@ const FormElements: React.FC = () => {
     const newProcess = { phase, name, review };
 
     try {
-      const response = await fetch("http://localhost:5000/api/process", {
+      const response = await fetch("https://admin-kappa-swart.vercel.app/api/process", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newProcess),
@@ -57,7 +57,7 @@ const FormElements: React.FC = () => {
 
   const handleDelete = async (id: string) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/process/${id}`, {
+      const response = await fetch(`https://admin-kappa-swart.vercel.app/api/process/${id}`, {
         method: "DELETE",
       });
 
