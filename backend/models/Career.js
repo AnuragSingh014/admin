@@ -1,0 +1,14 @@
+import mongoose from "mongoose";
+
+const CareerSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  organisation: { type: String, required: true },
+  serviceType: { type: String, required: true },
+  elaboration: { type: String, required: true },
+  phone: { type: String, required: true },
+  email: { type: String, required: true },
+}, { timestamps: true });
+
+const Career = mongoose.model("Career", CareerSchema);
+
+export default Career;
