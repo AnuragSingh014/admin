@@ -72,6 +72,15 @@ function App() {
           }
         />
         <Route
+          path="/"
+          element={
+            <>
+              <PageTitle title="Form Layout | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+              <FormLayout />
+            </>
+          }
+        />
+        <Route
           path="/tables"
           element={
             <>
