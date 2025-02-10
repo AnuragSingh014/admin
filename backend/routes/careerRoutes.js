@@ -1,37 +1,45 @@
 import express from "express";
-import Career from "../models/Career.js"; // Ensure ES Module import
+import Career from "../models/Career.js";
 
 const router = express.Router();
 
-// @route   POST /api/contact/submit
-// @desc    Save contact form submission
+// @route   POST /api/career/submit
+// @desc    Save career form submission
 router.post("/submit", async (req, res) => {
   try {
-    const { name, organisation, serviceType, elaboration, phone, email } = req.body;
+    const { name, organisation, phone, about, reasonForJoining } = req.body;
 
-    if (!name || !email || !phone) {
-      return res.status(400).json({ message: "Name, email, and phone are required" });
+    // Validate required fields
+    if (!name || !organisation || !phone || !about || !reasonForJoining) {
+      return res.status(400).json({ error: "All fields are required." });
     }
 
-    const newCareer = new Career({ name, organisation, serviceType, elaboration, phone, email });
+    // Save to database
+    const newSubmission = new Career({
+      name,
+      organisation,
+      phone,
+      about,
+      reasonForJoining,
+    });
 
-    await newCareer.save();
-    res.status(201).json({ message: "Contact form submitted successfully", data: newCareer });
+    await newSubmission.save();
+    return res.status(201).json({ message: "Form submitted successfully." });
   } catch (error) {
-    console.error("Error saving contact form:", error);
-    res.status(500).json({ message: "Internal server error" });
+    console.error("Error saving form:", error);
+    return res.status(500).json({ error: "Server error. Please try again." });
   }
 });
 
-// @route   GET /api/contact/all
-// @desc    Get all contact form submissions
+// @route   GET /api/career/all
+// @desc    Fetch all submissions
 router.get("/all", async (req, res) => {
   try {
-    const careers = await Career.find().sort({ createdAt: -1 });
-    res.status(200).json(careers);
+    const submissions = await Career.find().sort({ createdAt: -1 });
+    return res.status(200).json(submissions);
   } catch (error) {
-    console.error("Error fetching contacts:", error);
-    res.status(500).json({ message: "Internal server error" });
+    console.error("Error fetching submissions:", error);
+    return res.status(500).json({ error: "Server error. Please try again." });
   }
 });
 
