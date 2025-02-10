@@ -54,7 +54,7 @@ const FormLayout = () => {
 
   const handleDelete = async (jobId: string) => {
     try {
-      const response = await fetch(`https://admin-kappa-swart.vercel.app/jobs/${jobId}`, {
+      const response = await fetch(`https://admin-kappa-swart.vercel.app/api/jobs/${jobId}`, {
         method: 'DELETE',
       });
       

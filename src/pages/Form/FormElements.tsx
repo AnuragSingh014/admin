@@ -3,7 +3,7 @@ import { useState, useEffect, FormEvent } from "react";
 import Breadcrumb from "../../components/Breadcrumbs/Breadcrumb";
 
 interface Process {
-  _id: string; // Assuming MongoDB assigns _id
+  id: string; // Keeping `id` as it was in the backend
   phase: string;
   name: string;
   review: string;
@@ -49,7 +49,7 @@ const FormElements: React.FC = () => {
       setPhaseNumber("");
       setName("");
       setReview("");
-      fetchProcesses();
+      fetchProcesses(); // Refresh list after adding
     } catch (error) {
       console.error("Error submitting form:", error);
     }
@@ -62,7 +62,8 @@ const FormElements: React.FC = () => {
       });
 
       if (!response.ok) throw new Error("Failed to delete process");
-      fetchProcesses();
+
+      setProcesses((prev) => prev.filter((process) => process.id !== id)); // Update UI instantly
     } catch (error) {
       console.error("Error deleting process:", error);
     }
@@ -139,7 +140,7 @@ const FormElements: React.FC = () => {
             <div className="p-6.5">
               {processes.length > 0 ? (
                 processes.map((process) => (
-                  <div key={process._id} className="mb-4 p-4 border rounded-lg">
+                  <div key={process.id} className="mb-4 p-4 border rounded-lg">
                     <div className="flex justify-between items-start mb-2">
                       <div>
                         <h4 className="font-medium text-black dark:text-white">
@@ -148,7 +149,7 @@ const FormElements: React.FC = () => {
                         <p className="text-sm mt-1">{process.review}</p>
                       </div>
                       <button
-                        onClick={() => handleDelete(process._id)}
+                        onClick={() => handleDelete(process.id)}
                         className="text-red-500 hover:text-red-700 transition"
                       >
                         Delete
